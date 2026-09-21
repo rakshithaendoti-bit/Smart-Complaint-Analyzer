@@ -1,0 +1,332 @@
+!DOCTYPE html>
+<html>
+<head>
+
+    <title>Smart Complaint Analyzer</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #061B46;
+            color: white;
+        }
+
+        .main-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        /* LEFT SIDE */
+
+        .left-panel {
+            flex: 1;
+            background: #082B67;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: #00D9FF;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BDEBFF;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #0B3475;
+            color: white;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: #BDEBFF;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 10px;
+            background: #2563EB;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0878E8;
+        }
+
+        /* RESULT */
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #0B2F69;
+            border-radius: 15px;
+            border: 1px solid #2563EB;
+        }
+
+        .result h2 {
+            color: #00D9FF;
+            margin-top: 0;
+        }
+
+        .result p {
+            font-size: 17px;
+            line-height: 1.6;
+            margin: 12px 0;
+        }
+
+        .label {
+            color: #BDEBFF;
+            font-weight: bold;
+        }
+
+        .category-result {
+            color: #20E0A0;
+            font-weight: bold;
+        }
+
+        .issue-result {
+            color: #FBBF24;
+            font-weight: bold;
+        }
+
+        .solution-result {
+            color: #00D9FF;
+            font-weight: bold;
+        }
+
+        /* RIGHT SIDE */
+
+        .right-panel {
+            width: 320px;
+            background: #082B67;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .right-panel h2 {
+            text-align: center;
+            color: #00D9FF;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            background: #0B3475;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            color: white;
+        }
+
+        .category-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+            background: #2563EB;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .main-container {
+                flex-direction: column;
+                width: 95%;
+            }
+
+            .left-panel {
+                width: 100%;
+            }
+
+            .right-panel {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="main-container">
+
+
+    <!-- LEFT SIDE -->
+
+    <div class="left-panel">
+
+        <h1>Smart Complaint Analyzer</h1>
+
+        <p class="subtitle">
+            Enter your complaint and get an automatic category,
+            issue and solution.
+        </p>
+
+
+        <form method="POST">
+
+            <textarea
+                name="complaint"
+                placeholder="Enter your complaint here..."
+                required
+            >{{ complaint }}</textarea>
+
+
+            <button type="submit">
+                ANALYZE COMPLAINT
+            </button>
+
+        </form>
+
+
+        {% if result %}
+
+        <div class="result">
+
+            <h2>Analysis Result</h2>
+
+            <p>
+                <span class="label">Category:</span>
+                <span class="category-result">
+                    {{ result.category }}
+                </span>
+            </p>
+
+            <p>
+                <span class="label">Issue:</span>
+                <span class="issue-result">
+                    {{ result.issue }}
+                </span>
+            </p>
+
+            <p>
+                <span class="label">Solution:</span>
+                <span class="solution-result">
+                    {{ result.solution }}
+                </span>
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="right-panel">
+
+        <h2>Categories</h2>
+
+
+        <div class="category">
+            <div class="category-icon">💻</div>
+            Laptop / Computer Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">📱</div>
+            Mobile / Phone Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">🌐</div>
+            Internet / Network Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">🌍</div>
+            App / Website Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">💳</div>
+            Payment Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">📦</div>
+            Delivery Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">🍔</div>
+            Food Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">👤</div>
+            Account Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">🔒</div>
+            Security / Privacy Issues
+        </div>
+
+
+        <div class="category">
+            <div class="category-icon">❓</div>
+            Other Issues
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
