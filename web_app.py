@@ -16,7 +16,7 @@ def home():
         if complaint:
 
             # Temporary import from your existing backend
-            from backend import analyze_complaint
+            from web_backend import analyze_complaint
 
             result = analyze_complaint(complaint)
 
